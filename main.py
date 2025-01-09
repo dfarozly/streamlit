@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import altair as alt
 
 #insert file
-file_path = "(2023_2024)_SNBT_SCORE.csv"
+file_path = "tryout_grades_results.csv"
 df = pd.read_csv(file_path)
 
 #layout
@@ -41,7 +41,7 @@ elif pd.api.types.is_object_dtype(df[filter_column]) or pd.api.types.is_categori
     unique_values = df[filter_column].unique()
     selected_values = st.sidebar.selectbox(f"Pilih {filter_column}", unique_values)
 
-filtered_data = df.loc[:,["Nama Event" , "PNU" , "PBM" , "PPU" , "PKT" , "LBI" , "LBE" , "PNM" , "Skor Rata-Rata"]][df[filter_column] == selected_values]
+filtered_data = df.loc[:,["Tryout Name" , "PNU" , "PBM" , "PPU" , "PKT" , "LBI" , "LBE" , "PNM" , "Skor Rata-Rata"]][df[filter_column] == selected_values]
 
 #create donut
 filtered_data_mean = round(filtered_data.loc[:,["PNU" , "PBM" , "PPU" , "PKT" , "LBI" , "LBE" , "PNM" , "Skor Rata-Rata"]].mean())
@@ -103,12 +103,12 @@ with st.container():
         st.bar_chart(filtered_data.loc[:,["Skor Rata-Rata"]], stack=False, height=200, color='#E74C3C')
 #tampilkan tabel nilai rata-rata
     with col3:
-        st.dataframe(filtered_data.loc[:,["Nama Event" , "Skor Rata-Rata"]],
+        st.dataframe(filtered_data.loc[:,["Tryout Name" , "Skor Rata-Rata"]],
         height=250,
-        column_order=("Nama Event" , "Skor Rata-Rata"),
+        column_order=("Tryout Name" , "Skor Rata-Rata"),
         hide_index="True",
         column_config={
-            "Nama Event":st.column_config.TextColumn("Nama Event"),
+            "Tryout Name":st.column_config.TextColumn("Tryout Name"),
             "Skor Rata-Rata":st.column_config.ProgressColumn("Skor Rata-Rata", format="%f", min_value=0, max_value=1000)},
         )
 
